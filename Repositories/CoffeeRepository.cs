@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeShop.Repositories
 {
-    public class CoffeeRepository
+    public class CoffeeRepository : ICoffeeRepository
     {
         private readonly string _connectionString;
         public CoffeeRepository(IConfiguration configuration)
@@ -39,7 +39,7 @@ namespace CoffeeShop.Repositories
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             BeanVarietyId = reader.GetInt32(reader.GetOrdinal("BeanVarietyId")),
                         };
-                        
+
                         coffees.Add(coffee);
                     }
 
