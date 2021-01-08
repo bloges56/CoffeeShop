@@ -82,5 +82,25 @@ namespace CoffeeShop.Repositories
                 }
             }
         }
+
+        public void Add(Coffee coffee)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Coffee (Title, BeanVarietyId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@title, @beanvariety)";
+                    cmd.Parameters.AddWithValue("@title", coffee.Title);
+                    cmd.Parameters.AddWithValue("@beanvariety", coffee.BeanVarietyId);
+                    
+
+                    coffee.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }

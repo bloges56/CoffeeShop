@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeShop.Models;
 using CoffeeShop.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,14 @@ namespace CoffeeShop.Controllers
             {
                 return NotFound();
             }
+            return Ok(coffee);
+        }
+
+        // https://localhost:5001/api/coffee/
+        [HttpPost]
+        public IActionResult Post(Coffee coffee)
+        {
+            _coffeeRepository.Add(coffee);
             return Ok(coffee);
         }
     }
