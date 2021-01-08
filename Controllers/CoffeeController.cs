@@ -45,6 +45,19 @@ namespace CoffeeShop.Controllers
             _coffeeRepository.Add(coffee);
             return Ok(coffee);
         }
+
+        // https://localhost:5001/api/coffee/5
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Coffee coffee)
+        {
+            if (id != coffee.Id)
+            {
+                return BadRequest();
+            }
+
+            _coffeeRepository.Update(coffee);
+            return NoContent();
+        }
     }
 
 }
